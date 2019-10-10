@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { FormGroup, Input, Container, Jumbotron, Row, Col,
-    Card, CardHeader,
+    Card, CardHeader, Modal,
+    ModalHeader, ModalBody, ModalFooter,
     CardBody, CardTitle, CardText,
     Button, Label,
     ListGroup, ListGroupItem, Form } from 'reactstrap';
+import { Link } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 import Header from "./Header";
 import Footer from "./Footer";
 import MateriCard from './cards/MateriCard';
@@ -26,12 +29,21 @@ class Event extends Component {
                     jenisMateri: "Motivasi"
                 }
             ],
+            modal: false,
             mats: [],
             kode_materi: "",
             nama_materi: "",
             jenis_materi: "",
             id_trainer: 0
         }
+
+        this.toggle = this.toggle.bind(this);
+    }
+
+    toggle() {
+        this.setState(prevState => ({
+          modal: !prevState.modal
+        }));
     }
 
     componentDidMount() {
@@ -123,16 +135,17 @@ class Event extends Component {
                                 <Row className="ml-5">
                                     <Col>
                                         <h3>Materi</h3>
+                                        <Button onClick={this.toggle}>Tambah Data</Button>
                                     </Col>
                                 </Row>
                                 <Row form className="ml-4 mt-2">
                                     <Col md={4}>
                                         <FormGroup>
-                                            <Input type="search"
+                                            {/* <Input type="search"
                                                 name="searchMateri"
                                                 id="searchMateri"
                                                 placeholder="Cari Materi"
-                                                className="ml-5 mb-2 mr-sm-2 mb-sm-0"/>
+                                                className="ml-5 mb-2 mr-sm-2 mb-sm-0"/> */}
                                         </FormGroup>
                                     </Col>
                                 </Row>
@@ -147,10 +160,9 @@ class Event extends Component {
                     </Container>
                 </Jumbotron>
                     {/* {matsData} */}
-                    <ListGroup>
-                        <ListGroupItem>
-                            <Label for="labelLogin">Add Materi</Label>
-                        </ListGroupItem>
+                    <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                        <ModalHeader toggle={this.toggle}>Tambah Materi</ModalHeader>
+                        <ModalBody>
                         <ListGroupItem>
                             <Form onSubmit={this.onSubmit}>
                                 <FormGroup>
@@ -201,14 +213,23 @@ class Event extends Component {
                                             .bind(this)}
                                     />
                                 </FormGroup>
-                                <Button
+                                <Button to="/event"
                                     // onClick={this
                                     // .submitRegister
                                     // .bind(this)}
                                     >Tambah</Button>
                                 </Form>
                         </ListGroupItem>
-                    </ListGroup>
+                        </ModalBody>
+                        <ModalFooter>
+                        </ModalFooter>
+                    </Modal>
+                    {/* <ListGroup>
+                        <ListGroupItem>
+                            <Label for="labelLogin">Add Materi</Label>
+                        </ListGroupItem>
+                        
+                    </ListGroup> */}
                 <Footer />
             </div>
         );

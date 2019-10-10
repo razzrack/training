@@ -27,7 +27,7 @@ class MateriCard extends React.Component {
     return (
     <div>
         <Card className="text-center">
-    <CardImg src={img1} height="250px" width="250px" />
+    {/* <CardImg src={img1} height="250px" width="250px" /> */}
             <CardBody>
                 <CardTitle>
                 <Link onClick={this.toggle}>{nama_materi}</Link></CardTitle>

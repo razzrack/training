@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     Card, CardHeader,
-    CardBody, CardTitle, CardText
+    CardBody, CardTitle, CardText, Jumbotron, Container
   } from 'reactstrap';
 import Header from "./Header";
 import Footer from "./Footer";
@@ -30,7 +30,12 @@ class Home extends Component {
         return (
             <div>
                 <Header />
-                <div className="container">
+                <Jumbotron fluid>
+                    <Container fluid>
+
+                    </Container>
+                </Jumbotron>
+                {/* <div className="container">
                     <div className="col-xs-12">
                     <h1>Accounts</h1>
                     {this.state.users && this.state.users.map((user) => (
@@ -40,13 +45,13 @@ class Home extends Component {
                                     <CardTitle>{user.nama_depan} {user.nama_belakang}</CardTitle>
                                     <CardText>
                                         Email : {user.email_akun}
-                                        {/* Email Trainer : {email_trainer} */}
+                                        {/* Email Trainer : {email_trainer} 
                                     </CardText>
                             </CardBody>
                         </Card>
                     ))}
                     </div>
-                </div>
+                </div> */}
                 <Footer />
             </div>
         );

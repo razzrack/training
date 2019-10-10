@@ -53,9 +53,9 @@ class Header extends Component {
                             <NavItem className="mr-4">
                                 <Link to="/about">About</Link>
                             </NavItem>
-                            <NavItem className="mr-4">
+                            {/* <NavItem className="mr-4">
                                 <Link onClick={this.toggle}>Login/Register</Link>
-                            </NavItem>
+                            </NavItem> */}
                         </Nav>
                     </Collapse>
                 </Navbar>
