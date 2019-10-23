@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Card, CardHeader,
+    Card, CardHeader, Label,
     CardBody, CardTitle, CardText
   } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
@@ -11,10 +11,19 @@ import Footer from "./Footer";
 class Admin extends Component {
     constructor(props) {
         super(props);
-    }
+        const nama_depan = localStorage.getItem("nama_depan");
+        let loggedIn = true;
+        // let nama_belakang = "nama_belakang";
+        // let email_akun = "email_akun";
+        // let password_akun = "password_akun";
+        if(nama_depan == null){
+            loggedIn = false
+        }
 
-    state = {
-        users: []
+        this.state = {
+            loggedIn,
+            users: []
+        }
     }
 
     componentDidMount() {

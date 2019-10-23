@@ -10,7 +10,10 @@ export default class TrainerCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        modal: false
+        modal: false,
+        nama_depan: localStorage.getItem("nama_depan"),
+        nama_belakang: localStorage.getItem("nama_belakang"),
+        email_akun: localStorage.getItem("email_akun")
       };
   
       this.toggle = this.toggle.bind(this);
@@ -34,7 +37,7 @@ export default class TrainerCard extends React.Component {
                     <Row>
                       <Col>
                         <CardTitle>
-                        <Link onClick={this.toggle}>{nama}</Link></CardTitle>
+                        <Link onClick={this.toggle}>{this.state.nama_depan} {this.state.nama_belakang}</Link></CardTitle>
                       </Col>
                     </Row>
                     <Row>
@@ -42,7 +45,7 @@ export default class TrainerCard extends React.Component {
                         <CardSubtitle>{skill}</CardSubtitle>
                       </Col>
                       <Col>
-                      <CardSubtitle>{email}</CardSubtitle>
+                      <CardSubtitle>{this.state.email_akun}</CardSubtitle>
                       </Col>
                     </Row>
                 </Card>

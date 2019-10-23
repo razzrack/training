@@ -59,69 +59,84 @@ class LoginBox extends React.Component {
 
     constructor(props) {
       super(props);
+      let loggedIn = false
+      this.state = {
+        accounts: [],
+        email: '',
+        password: '',
+        errors: [],
+        loggedIn
+      }
+    }
 
-    //   let loggedIn = true
-    //   if(token === null) {
-    //       loggedIn = false
-    //   }
- 
+    componentDidMount() {
+        fetch('http://localhost:3002/accounts')
+        .then(res => res.json())
+        .then((data) => {
+            this.setState({ accounts: data })
+            console.log(this.state.accounts)
+        })
+        .catch(console.log)
     }
     
-    state = {
-      email: '',
-      password: '',
-      errors: []
-    //   loggedIn
-    };
+    // state = {
+    //   email: '',
+    //   password: '',
+    //   errors: [],
+    //   loggedIn: false
+    // };
 
-    handleChange = (event) => {
-        const input = event.target;
-        const values = input.type === 'password' ? input.checked : input.value;
+    // handleChange = (event) => {
+    //     const input = event.target;
+    //     const values = input.type === 'password' ? input.checked : input.value;
 
-        this.setState({ [input.name]: values });
-    }
+    //     this.setState({ [input.name]: values });
+    // }
 
-    handleFormSubmit = () =>{
-        const { user, rememberMe } = this.state;
-        localStorage.setItem('rememberMe', rememberMe);
-        localStorage.setItem('user', rememberMe ? user : '');
-    };
+    // handleFormSubmit = () =>{
+    //     const { user, rememberMe } = this.state;
+    //     localStorage.setItem('rememberMe', rememberMe);
+    //     localStorage.setItem('user', rememberMe ? user : '');
+    // };
 
-    // showValidationErr(elm, msg) {
-    //     this.setState((prevState) => ( { errors: [...prevState.errors, { elm, msg }] } ));
-    //   }
+    showValidationErr(elm, msg) {
+        this.setState((prevState) => ( { errors: [...prevState.errors, { elm, msg }] } ));
+      }
   
-    //   clearValidationErr(elm) {
-    //     this.setState((prevState) => {
-    //         let newArr = [];
-    //         for(let err of prevState.errors) {
-    //             if(elm !== err.elm) {
-    //               newArr.push(err);
-    //             }
-    //         }
-    //         return {errors: newArr};
-    //     });
-    //   }
+      clearValidationErr(elm) {
+        this.setState((prevState) => {
+            let newArr = [];
+            for(let err of prevState.errors) {
+                if(elm !== err.elm) {
+                  newArr.push(err);
+                }
+            }
+            return {errors: newArr};
+        });
+      }
   
-    //   onEmailChange(e) {
-    //       this.setState({ email: e.target.value});
-    //       this.clearValidationErr("email");
-    //   }
+      onEmailChange(e) {
+          this.setState({ email: e.target.value});
+          this.clearValidationErr("email");
+      }
   
-    //   onPasswordChange(e) {
-    //       this.setState({ password: e.target.value});
-    //       this.clearValidationErr("password");
+      onPasswordChange(e) {
+          this.setState({ password: e.target.value});
+          this.clearValidationErr("password");
   
-        //   this.setState({pwdState: "weak"});
-        //   if (e.target.value.length > 8) {
-        //       this.setState({pwdState: "medium"});
-        //   } else if (e.target.value.length > 12) {
-        //       this.setState({pwdState: "strong"});
-        //   }
+          this.setState({pwdState: "weak"});
+          if (e.target.value.length > 8) {
+              this.setState({pwdState: "medium"});
+          } else if (e.target.value.length > 12) {
+              this.setState({pwdState: "strong"});
+          }
+      }
       
   
       submitLogin = (e) => {
         e.preventDefault();
+        let email = "email";
+        let password = "password";
         const url = 'http://localhost:3002/history_logins/'
         const dataHistory =  {
             email: this.state.email,
@@ -129,15 +144,28 @@ class LoginBox extends React.Component {
         }
         axios.post(url, dataHistory)
         .then(res => console.log(res.data));
+        // localStorage.setItem(email, this.state.email)
+        // localStorage.setItem(password, this.state.password)
+        
+        // if(this.state.email === localStorage.getItem("email_akun" 
+        // && this.state.password === localStorage.getItem("password_akun"))) {
+        if(this.state.email==="nama" && this.state.password==="nama") {
+            localStorage.setItem(email, this.state.email)
+            localStorage.setItem(password, this.state.password)
+            this.setState({
+                loggedIn: true
+            })
+        }
 
-        localStorage.setItem("token", "asdadaasd")
         this.setState({
-            loggedIn: true,
             email: "",
             password: ""
         })
+        
 
-        //   e.preventDefault()
+    }
+
+    //     //   e.preventDefault()
         //   console.log(this.state);
           
         //   if(this.state.email ==="admin@gmail.com" && this.state.password === "admin123") {
@@ -152,7 +180,6 @@ class LoginBox extends React.Component {
         //         this.showValidationErr("password", "Password tidak boleh kosong!")
         //       }
         //   }
-      }
   
     render() {
         let emailErr = null,
@@ -166,12 +193,12 @@ class LoginBox extends React.Component {
             }
         }
 
-        if(this.state.loggedIn) {
-            return <Redirect to="/admin"/>
+        if(this.state.loggedIn){
+            return <Redirect to="/admin" />
         }
-
-      return (
-        <div className="inner-container">
+        
+        return (
+            <div className="inner-container">
           <ListGroup>
             <ListGroupItem>
                 <Label for="labelLogin">Login</Label>
@@ -185,6 +212,7 @@ class LoginBox extends React.Component {
                             name="email"
                             id="login-input"
                             placeholder="Email Address"
+                            value={this.state.email}
                             onChange={this
                                 .onEmailChange
                                 .bind(this)}
@@ -201,10 +229,11 @@ class LoginBox extends React.Component {
                             name="password"
                             id="login-input"
                             placeholder="Password"
+                            value={this.state.password}
                             onChange={this
                                 .onPasswordChange
                                 .bind(this)}
-                        />
+                                />
                         <small className="danger-error">{passwordErr
                             ? passwordErr
                             : ""}
@@ -234,10 +263,10 @@ class RegisterBox extends React.Component {
             errors: [],
             pwdState: null,
         };
-    //     this.onFirstNameChange = this.onFirstNameChange.bind(this);
-    //     this.onLastNameChange = this.onLastNameChange.bind(this);
-    //   this.onEmailChange = this.onEmailChange.bind(this);
-    //   this.onPasswordChange = this.onPasswordChange.bind(this);
+        this.onFirstNameChange = this.onFirstNameChange.bind(this);
+        this.onLastNameChange = this.onLastNameChange.bind(this);
+        this.onEmailChange = this.onEmailChange.bind(this);
+        this.onPasswordChange = this.onPasswordChange.bind(this);
 
     }
     
@@ -359,7 +388,9 @@ class RegisterBox extends React.Component {
                 <Label for="labelLogin">Register</Label>
             </ListGroupItem>
             <ListGroupItem>
-                <Form onSubmit={this.onSubmitRegister}>
+                <Form 
+                // onSubmit={this.onSubmitRegister}
+                >
                     <FormGroup>
                         <Label for="firstname">Nama Depan</Label>
                         <Input
@@ -367,6 +398,7 @@ class RegisterBox extends React.Component {
                             name="firstname"
                             id="login-input"
                             placeholder="Nama Depan"
+                            value={this.state.nama_depan}
                             onChange={this
                                 .onFirstNameChange
                                 .bind(this)}
@@ -386,6 +418,7 @@ class RegisterBox extends React.Component {
                             name="lastname"
                             id="login-input"
                             placeholder="Nama Belakang"
+                            value={this.state.nama_belakang}
                             onChange={this
                                 .onLastNameChange
                                 .bind(this)}
@@ -405,6 +438,7 @@ class RegisterBox extends React.Component {
                             name="email"
                             id="login-input"
                             placeholder="Email Address"
+                            value={this.state.email_akun}
                             onChange={this
                                 .onEmailChange
                                 .bind(this)}
@@ -424,6 +458,7 @@ class RegisterBox extends React.Component {
                             name="password"
                             id="login-input"
                             placeholder="Password"
+                            value={this.state.password_akun}
                             onChange={this
                                 .onPasswordChange
                                 .bind(this)}
@@ -452,9 +487,7 @@ class RegisterBox extends React.Component {
                         </FormFeedback> */}
                     </FormGroup>
                     <Button
-                        // onClick={this
-                        // .submitRegister
-                        // .bind(this)}
+                        onClick={this.onSubmitRegister}
                         >Register</Button>
                     </Form>
             </ListGroupItem>

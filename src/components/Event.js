@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { Redirect } from 'react-router-dom';
 import Header from "./Header";
 import Footer from "./Footer";
+import HeaderAdm from "./HeaderAdm";
 import MateriCard from './cards/MateriCard';
 import ProfileCard from './cards/ProfileCard';
 
@@ -88,7 +89,7 @@ class Event extends Component {
             kode_materi: "",
             nama_materi: "",
             jenis_materi: "",
-            id_trainer: 0
+            id_trainer: ""
         })
 
     }
@@ -127,7 +128,7 @@ class Event extends Component {
 
         return (
             <div>
-                <Header />
+                <HeaderAdm />
                 <Jumbotron fluid>
                     <Container fluid>
                         <Row>
@@ -136,6 +137,7 @@ class Event extends Component {
                                     <Col>
                                         <h3>Materi</h3>
                                         <Button onClick={this.toggle}>Tambah Data</Button>
+                                        <Link className="ml-4" to="/formpeserta">Daftar Event</Link>
                                     </Col>
                                 </Row>
                                 <Row form className="ml-4 mt-2">
@@ -219,9 +221,11 @@ class Event extends Component {
                                     // .bind(this)}
                                     >Tambah</Button>
                                 </Form>
+                                
                         </ListGroupItem>
                         </ModalBody>
                         <ModalFooter>
+                            
                         </ModalFooter>
                     </Modal>
                     {/* <ListGroup>

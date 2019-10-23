@@ -13,10 +13,11 @@ import Login from "./Login";
 class HeaderAdm extends Component {
     constructor(props) {
         super(props);
-        localStorage.removeItem("token");
         this.state = {
           isOpen: false,
-          modal: false
+          modal: false,
+          nama: localStorage.getItem("nama_depan")
+        
         };
 
         this.toggle = this.toggle.bind(this);
@@ -42,9 +43,9 @@ class HeaderAdm extends Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            <NavItem className="mr-4">
+                            {/* <NavItem className="mr-4">
                                 <Link to="/admin">Home</Link>
-                            </NavItem>
+                            </NavItem> */}
                             <NavItem className="mr-4">
                                 <Link to="/trainer">Trainer</Link>
                             </NavItem>
@@ -53,6 +54,9 @@ class HeaderAdm extends Component {
                             </NavItem>
                             <NavItem className="mr-4">
                                 <Link to="/about">About</Link>
+                            </NavItem>
+                            <NavItem className="mr-4">
+                                <Link to="/profile">Halo, {this.state.nama} </Link>
                             </NavItem>
                             <NavItem className="mr-4">
                                 <Link to="/">Logout</Link>

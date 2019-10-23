@@ -10,6 +10,7 @@ import Event from './components/Event';
 import About from './components/About';
 import Admin from './components/Admin';
 import Profile from './components/Profile';
+import Peserta from './components/Peserta';
 // import Signin from './components/auth/Signin';
 // import Signup from './components/auth/SignUp';
 // import reducers from './Reducers';
@@ -40,6 +41,7 @@ class routes extends Component {
                     <Route exact path="/event" component={Event} />
                     <Route exact path="/about" component={About} />
                     <Route exact path="/profile" component={Profile} />
+                    <Route exact path="/peserta" component={Peserta} />
                     {/* <Switch>
                         <Route path="/signup" component={Signup}/>
                         <Route path="/login" component={Login}/>

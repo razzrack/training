@@ -41,9 +41,9 @@ class Header extends Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            <NavItem className="mr-4">
+                            {/* <NavItem className="mr-4">
                                 <Link to="/">Home</Link>
-                            </NavItem>
+                            </NavItem> */}
                             <NavItem className="mr-4">
                                 <Link to="/trainer">Trainer</Link>
                             </NavItem>
@@ -53,9 +53,12 @@ class Header extends Component {
                             <NavItem className="mr-4">
                                 <Link to="/about">About</Link>
                             </NavItem>
-                            {/* <NavItem className="mr-4">
+                            <NavItem className="mr-4">
+                                <Link to="/peserta">Daftar</Link>
+                            </NavItem>
+                            <NavItem className="mr-4">
                                 <Link onClick={this.toggle}>Login/Register</Link>
-                            </NavItem> */}
+                            </NavItem>
                         </Nav>
                     </Collapse>
                 </Navbar>

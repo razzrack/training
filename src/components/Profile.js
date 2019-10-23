@@ -6,6 +6,7 @@ import { FormGroup, Input, Container, Jumbotron, Row, Col,
     Button, Label,
     ListGroup, ListGroupItem, Form } from 'reactstrap';
 import Header from "./Header";
+import HeaderAdm from "./HeaderAdm";
 import Footer from "./Footer";
 import ProfileCard from './cards/ProfileCard';
 
@@ -67,7 +68,7 @@ class Profile extends Component {
         })
         return (
             <div>
-                <Header />
+                <HeaderAdm />
                     <Jumbotron fluid>
                         <Container fluid>
                             <Row>
@@ -94,18 +95,6 @@ class Profile extends Component {
                                     <Row className="ml-5 mt-2">
                                         <Jumbotron fluid>
                                             <Container fluid>
-                                                {/* {trainerCard} */}
-                                                <Form onSubmit={this.handleFormSubmit}>
-                                                <FormGroup>
-                                                    <Label for="user">User</Label>
-                                                    <Input
-                                                        type="text"
-                                                        name="kodemateri"
-                                                        value={this.state.user}
-                                                        onChange={this
-                                                            .handleChange}
-                                                    />
-                                                </FormGroup>
                                                 {/* <FormGroup>
                                                     <Label for="namamateri">Nama Materi</Label>
                                                         <Input
@@ -129,23 +118,7 @@ class Profile extends Component {
                                                                 .onJenisMateriChange
                                                                 .bind(this)}
                                                         />
-                                                </FormGroup> */}
-                                                <FormGroup>
-                                                <Label for="rememberMe">Remember Me</Label>
-                                                    <Input
-                                                        type="checkbox"
-                                                        name="rememberMe"
-                                                        checked={this.state.rememberMe}
-                                                        onChange={this
-                                                            .handleChange}
-                                                    />
-                                                </FormGroup>
-                                                <Button
-                                                    // onClick={this
-                                                    // .submitRegister
-                                                    // .bind(this)}
-                                                    >Tambah</Button>
-                                                </Form>
+                                                </FormGroup> */}                                                
                                             </Container>
                                         </Jumbotron>
                                     </Row>

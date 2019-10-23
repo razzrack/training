@@ -10,12 +10,14 @@ import { Link } from "react-router-dom";
 import { Redirect } from 'react-router-dom';
 import Header from "./Header";
 import Footer from "./Footer";
+import HeaderAdm from "./HeaderAdm";
 import TrainerCard from './cards/TrainerCard';
 import ProfileCard from './cards/ProfileCard';
 
 class Trainer extends Component {
     constructor(){
         super();
+        let loggedIn;
         this.state = {
             trainers: [],
             pelatih: [
@@ -34,7 +36,8 @@ class Trainer extends Component {
             nama_trainer: "",
             skill_trainer: "",
             email_trainer: "",
-            password_trainer: ""
+            password_trainer: "",
+            loggedIn
         }
         this.toggle = this.toggle.bind(this);
     }
@@ -95,7 +98,6 @@ class Trainer extends Component {
             email_trainer: "",
             password_trainer: ""
         })
-
     }
 
     // componentDidMount() {
@@ -122,9 +124,15 @@ class Trainer extends Component {
                 </Col>
             )
         })
+        // let header = this.state.loggedIn;
+        // if(header == true){
+        //     <HeaderAdm />
+        // } else {
+        //     <Header />
+        // }
         return (
             <div>
-                <Header />
+                <HeaderAdm />
                 <Jumbotron fluid>
                     <Container fluid>
                         <Row>
